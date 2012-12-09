@@ -13,6 +13,8 @@ def dict2xml(d, pretty=False, indent=0):
             accumulator += dict2xml(d[key], pretty, indent + 4)
             if pretty:
                 accumulator += "\n"
+        elif isinstance(d[key], bool):
+            accumulator += str(d[key]).lower()
         else:
             accumulator += str(d[key])
 

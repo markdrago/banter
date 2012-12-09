@@ -47,7 +47,7 @@ class TestRequest(unittest.TestCase):
         expected = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         expected += '<createReview>'
         expected += '<reviewData>'
-        expected += '<allowReviewersToJoin>True</allowReviewersToJoin>'
+        expected += '<allowReviewersToJoin>true</allowReviewersToJoin>'
         expected += '</reviewData>'
         expected += '</createReview>'
         self.assertEqual(expected, self.c.prepare_payload(r))

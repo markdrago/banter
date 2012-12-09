@@ -45,6 +45,7 @@ class Crucible(object):
             'allowReviewersToJoin': kwargs['allow_reviewers_to_join'],
             'author': {'userName': kwargs['author']},
             'creator': {'userName': kwargs['author']},
+            'moderator': {'userName': kwargs['author']},
             'description': kwargs['description'],
             'name': kwargs['name'],
             'projectKey': kwargs['project_key']

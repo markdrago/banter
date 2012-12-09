@@ -8,6 +8,11 @@ class TestDict2Xml(unittest.TestCase):
         expected = '<a>1</a>'
         self.assertEqual(expected, dict2xml.dict2xml(d))
 
+    def test_single_boolean_tag(self):
+        d = {'a': True}
+        expected = '<a>true</a>'
+        self.assertEqual(expected, dict2xml.dict2xml(d))
+
     def test_multiple_tags(self):
         d = {'a': 1,
              'b': 'two'}

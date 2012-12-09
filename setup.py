@@ -15,7 +15,7 @@ setup(
             'dejaview = dejaview.dejaview:main'
         ]
     },
-    install_requires=['requests'],
+    install_requires=['requests', 'argparse'],
     test_suite='unittest2.collector',
     classifiers=[
         'Programming Language :: Python',
