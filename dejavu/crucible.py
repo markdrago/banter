@@ -1,4 +1,5 @@
 import requests
+import urlparse
 import json
 
 import dict2xml
@@ -10,7 +11,10 @@ class Crucible(object):
     def get_auth_token(self, username, password):
         request = self.get_auth_token_request(username, password)
         response = self.make_request(request)
-        return response
+        if response.json is None:
+            print "An error occurred while trying to get an auth token from crucible"
+            return None
+        return response.json['token']
 
     @staticmethod
     def get_auth_token_request(username, password):
@@ -78,12 +82,22 @@ class Crucible(object):
             return self.make_request_get(request)
 
     def make_request_get(self, request):
-        return requests.get(self.baseurl + request['url'],
+        return requests.get(self.combine_url_components(self.baseurl, request['url']),
                             params=request['params'],
                             headers=self.get_headers())
 
     def make_request_post(self, request):
-        return requests.post(self.baseurl + request['url'],
+        return requests.post(self.combine_url_components(self.baseurl, request['url']),
                              params=request['params'],
                              headers=self.get_headers(),
                              data=self.prepare_payload(request['data']))
+
+    @staticmethod
+    def combine_url_components(baseurl, therest):
+        while baseurl[-1:] == '/':
+            baseurl = baseurl[:-1]
+
+        while therest[:1] == '/':
+            therest = therest[1:]
+
+        return baseurl + '/' + therest

@@ -40,12 +40,12 @@ def setup_auth_token(conf, crucible):
     if token is None:
         username = conf.get_value('crucible', 'username')
         token = acquire_auth_token(crucible, username)
-        conf.set_value('crucible', 'token', token)
+        if token is not None:
+            conf.set_value('crucible', 'token', token)
 
 def acquire_auth_token(crucible, username):
     password = prompt_for_password()
-    response = crucible.get_auth_token(username, password)
-    return response.json['token']
+    return crucible.get_auth_token(username, password)
 
 def prompt_for_password():
     print "In order to get an auth token from crucible, you must enter your password once."
