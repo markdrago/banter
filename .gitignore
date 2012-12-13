@@ -3,3 +3,4 @@ __pycache__
 *~
 dejavu.egg-info
 *.egg
+build
