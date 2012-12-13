@@ -1,4 +1,5 @@
 import unittest
+from mock import Mock
 import StringIO
 
 from dejavu.config import Config
@@ -46,3 +47,10 @@ class TestConfig(unittest.TestCase):
         c.load_from_file_pointer(buffer)
         buffer.close()
         return c
+
+    def test_load_from_file(self):
+        c = Config()
+        c.parser = Mock()
+
+        c.load_from_file()
+        self.assertTrue(c.parser.read.called)

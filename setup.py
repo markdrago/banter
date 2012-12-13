@@ -16,6 +16,7 @@ setup(
         ]
     },
     install_requires=['requests', 'argparse'],
+    tests_require=['mock'],
     test_suite='unittest2.collector',
     classifiers=[
         'Programming Language :: Python',
