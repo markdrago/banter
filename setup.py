@@ -1,18 +1,18 @@
 from setuptools import setup
 
 setup(
-    name='dejaview',
+    name='dejavu',
     version='0.1',
     author='Mark Drago',
     author_email='markdrago@gmail.com',
-    url='http://github.com/markdrago/dejaview',
-    download_url='http://pypi.python.org/pypi/dejaview',
+    url='http://github.com/markdrago/dejavu',
+    download_url='http://pypi.python.org/pypi/dejavu',
     description='Create crucible code reviews from the command line',
     license='MIT',
-    packages=['dejaview'],
+    packages=['dejavu'],
     entry_points={
         'console_scripts': [
-            'dejaview = dejaview.dejaview:main'
+            'dejavu = dejavu.dejavu:main'
         ]
     },
     install_requires=['requests', 'argparse'],
@@ -28,7 +28,7 @@ setup(
         'Topic :: Utilities'
     ],
     long_description="""
-**DejaView makes it easy to create code reviews from the command line.**
+**Dejavu makes it easy to create code reviews from the command line.**
 
 Currently it only supports the crucible code review tool created by
 Atlassian.

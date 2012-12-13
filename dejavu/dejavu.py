@@ -56,7 +56,7 @@ def load_config():
     conf = config.Config()
     conf.load_from_file()
     if not has_all_required_fields(conf):
-        print "Your configuration is incomplete, please run 'dejaview setup' to get that fixed up"
+        print "Your configuration is incomplete, please run 'dejavu setup' to get that fixed up"
         return None
     return conf
 

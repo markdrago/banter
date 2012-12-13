@@ -1,6 +1,6 @@
 import unittest
 
-from dejaview import crucible
+from dejavu import crucible
 
 class TestRequest(unittest.TestCase):
     def setUp(self):

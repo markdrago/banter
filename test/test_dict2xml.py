@@ -1,6 +1,6 @@
 import unittest
 
-from dejaview import dict2xml
+from dejavu import dict2xml
 
 class TestDict2Xml(unittest.TestCase):
     def test_single_tag(self):

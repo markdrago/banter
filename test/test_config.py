@@ -1,7 +1,7 @@
 import unittest
 import StringIO
 
-from dejaview.config import Config
+from dejavu.config import Config
 
 class TestConfig(unittest.TestCase):
     def test_get_auth_token(self):
