@@ -1,53 +1,24 @@
 import getpass
 
-def setup_config_except_auth_token(conf):
-    get_crucible_url(conf)
-    get_project_key(conf)
-    get_username(conf)
+def get_config_from_user(existing={}):
+    cr_settings = existing.get('crucible', {})
+    cr_settings['url'] = get_input("Please enter the URL for crucible:", cr_settings.get('url'))
+    cr_settings['project_key'] = get_input("Please enter the crucible project key:", cr_settings.get('project_key'))
+    cr_settings['username'] = get_input("Please enter your crucible username:", cr_settings.get('username'))
+    cr_settings['password'] = get_crucible_password()
+    existing['crucible'] = cr_settings
+    return existing
 
-def get_crucible_url(conf):
-    url = conf.get_value('crucible', 'url')
-    if url is None:
-        url = acquire_crucible_url()
-        conf.set_value('crucible', 'url', url)
+def get_input(prompt, previous):
+    prompt_suffix = " "
+    if previous is not None:
+        prompt_suffix = " [" + previous + "]"
+    value = raw_input(prompt + prompt_suffix)
+    if len(value) == 0:
+        return previous
+    return value
 
-def acquire_crucible_url():
-    prompt = "Please enter the URL for crucible (probably something like http://hostname.com/fisheye): "
-    return raw_input(prompt)
-
-def get_project_key(conf):
-    project_key = conf.get_value('crucible', 'project_key')
-    if project_key is None:
-        project_key = prompt_for_project_key()
-        conf.set_value('crucible', 'project_key', project_key)
-
-def prompt_for_project_key():
-    prompt = "Please enter your crucible project key (probably something like CR): "
-    return raw_input(prompt)
-
-def get_username(conf):
-    username = conf.get_value('crucible', 'username')
-    if username is None:
-        username = prompt_for_username()
-        conf.set_value('crucible', 'username', username)
-
-def prompt_for_username():
-    prompt = "Please enter your crucible username: "
-    return raw_input(prompt)
-
-def setup_auth_token(conf, crucible):
-    token = conf.get_value('crucible', 'token')
-    if token is None:
-        username = conf.get_value('crucible', 'username')
-        token = acquire_auth_token(crucible, username)
-        if token is not None:
-            conf.set_value('crucible', 'token', token)
-
-def acquire_auth_token(crucible, username):
-    password = prompt_for_password()
-    return crucible.get_auth_token(username, password)
-
-def prompt_for_password():
+def get_crucible_password():
     print "In order to get an auth token from crucible, you must enter your password once."
     password = getpass.getpass()
     return password

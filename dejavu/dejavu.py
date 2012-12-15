@@ -42,14 +42,18 @@ def create_review(crucible, username, auth_token, project_key, patch):
 def setup():
     conf = config.Config()
     conf.load_from_file()
-    config_ui.setup_config_except_auth_token(conf)
+    updated_conf = config_ui.get_config_from_user(conf.as_dict())
+    set_crucible_token(updated_conf)
+    conf.set_from_dict(updated_conf)
+    conf.save()
 
-    crucible_url = conf.get_value('crucible', 'url')
-    crucible_conn = crucible.Crucible(crucible_url)
+def set_crucible_token(conf):
+    #get crucible token and forget crucible password
+    crucible_conn = crucible.Crucible(conf['crucible']['url'])
+    token = crucible_conn.get_auth_token(conf['crucible']['username'], conf['crucible']['password'])
 
-    config_ui.setup_auth_token(conf, crucible_conn)
-
-    return 0
+    conf['crucible']['token'] = token
+    del conf['crucible']['password']
 
 def load_config():
     """load config, check for required fields, print error if any are missing"""
