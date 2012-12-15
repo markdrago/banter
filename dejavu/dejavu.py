@@ -1,14 +1,22 @@
 import readline
 import sys
+import argparse
 
 import crucible
 import config
 import config_ui
 
 def main():
-    if sys.argv[1] == 'setup':
-        return setup()
-
+    parser = argparse.ArgumentParser(description='Create Code Reviews')
+    parser.add_argument('--setup', action='store_true', help='setup dejavu configuration')
+    parser_results = vars(parser.parse_args())
+    
+    if parser_results['setup']:
+        setup()
+    else:
+        create_review()
+        
+def create_review():
     conf = load_config()
     if conf is None:
         return 1
@@ -21,10 +29,10 @@ def main():
 
     patch = sys.stdin.read()
 
-    review_id = create_review(crucible_conn, username, auth_token, project_key, patch)
+    review_id = do_create_review(crucible_conn, username, auth_token, project_key, patch)
     print crucible_url + "/cru/" + review_id
 
-def create_review(crucible, username, auth_token, project_key, patch):
+def do_create_review(crucible, username, auth_token, project_key, patch):
     parameters = {
         'allow_reviewers_to_join': True,
         'author': username,
