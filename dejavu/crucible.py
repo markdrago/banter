@@ -1,6 +1,5 @@
 import requests
 import urlparse
-import json
 
 import dict2xml
 import utils
@@ -12,10 +11,10 @@ class Crucible(object):
     def get_auth_token(self, username, password):
         request = self.get_auth_token_request(username, password)
         response = self.make_request(request)
-        if response.json is None:
+        if response.json() == "" or response.json() is None:
             print "An error occurred while trying to get an auth token from crucible"
             return None
-        return response.json['token']
+        return response.json()['token']
 
     @staticmethod
     def get_auth_token_request(username, password):

@@ -44,9 +44,10 @@ def do_create_review(crucible, username, auth_token, project_key, patch):
     }
 
     resp = crucible.create_review(auth_token, **parameters)
-    #print resp.request.data
+    #print resp.request.body
+    #print "-----"
     #print resp.text
-    return resp.json['permaId']['id']
+    return resp.json()['permaId']['id']
 
 def setup():
     conf = config.Config()
