@@ -5,6 +5,7 @@ import argparse
 import crucible
 import config
 import config_ui
+import utils
 
 def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
@@ -30,7 +31,7 @@ def create_review():
     patch = sys.stdin.read()
 
     review_id = do_create_review(crucible_conn, username, auth_token, project_key, patch)
-    print crucible_url + "/cru/" + review_id
+    print utils.combine_url_components(crucible_url, "cru", review_id)
 
 def do_create_review(crucible, username, auth_token, project_key, patch):
     parameters = {
