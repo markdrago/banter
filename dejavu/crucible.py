@@ -58,7 +58,7 @@ class Crucible(object):
         return {
             'createReview': {
                 'reviewData': reviewData,
-                'patch': kwargs['patch']
+                'patch': "<![CDATA[" + kwargs['patch'] + "]]>"
             }
         }
 
