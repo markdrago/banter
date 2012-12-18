@@ -66,12 +66,12 @@ class TestConfig(unittest.TestCase):
             'sec1': {
                 'key1': 'val1',
                 'key2': 'val2'
-                },
+            },
             'sec2': {
                 'key3': 'val3'
-                }
             }
-        self.assertEqual(expected, c.as_dict())   
+        }
+        self.assertEqual(expected, c.as_dict())
 
     def set_from_dict(self):
         c = config.Config()
@@ -79,11 +79,11 @@ class TestConfig(unittest.TestCase):
             'sec1': {
                 'key1': 'val1',
                 'key2': 'val2'
-                },
+            },
             'sec2': {
                 'key3': 'val3'
-                }
             }
+        }
         c.set_from_dict(replacement)
         self.assertEqual('val1', c.get_value('sec1', 'key1'))
         self.assertEqual('val2', c.get_value('sec1', 'key2'))

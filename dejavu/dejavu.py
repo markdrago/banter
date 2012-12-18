@@ -11,12 +11,12 @@ def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
     parser.add_argument('--setup', action='store_true', help='setup dejavu configuration')
     parser_results = vars(parser.parse_args())
-    
+
     if parser_results['setup']:
         setup()
     else:
         create_review()
-        
+
 def create_review():
     conf = load_config()
     if conf is None:
