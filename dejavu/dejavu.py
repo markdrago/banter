@@ -27,13 +27,15 @@ def create_review():
     username = conf.get_value('crucible', 'username')
     auth_token = conf.get_value('crucible', 'token')
     project_key = conf.get_value('crucible', 'project_key')
+    reviewers = conf.get_value('crucible', 'reviewers')
 
     patch = sys.stdin.read()
 
     review_id = do_create_review(crucible_conn, username, auth_token, project_key, patch)
+    add_reviewers(crucible_conn, auth_token, review_id, reviewers)
     print utils.combine_url_components(crucible_url, "cru", review_id)
 
-def do_create_review(crucible, username, auth_token, project_key, patch):
+def do_create_review(crucible_conn, username, auth_token, project_key, patch):
     parameters = {
         'allow_reviewers_to_join': True,
         'author': username,
@@ -43,11 +45,13 @@ def do_create_review(crucible, username, auth_token, project_key, patch):
         'patch': patch
     }
 
-    resp = crucible.create_review(auth_token, **parameters)
-    #print resp.request.body
-    #print "-----"
-    #print resp.text
+    resp = crucible_conn.create_review(auth_token, **parameters)
     return resp.json()['permaId']['id']
+
+def add_reviewers(crucible_conn, auth_token, review_id, reviewers):
+    if reviewers is not None and reviewers != "":
+        reviewer_list = [r.strip() for r in reviewers.split(',')]
+        r = crucible_conn.add_reviewers(auth_token, review_id, reviewer_list)
 
 def setup():
     conf = config.Config()

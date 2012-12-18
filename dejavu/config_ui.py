@@ -6,6 +6,10 @@ def get_config_from_user(existing={}):
     cr_settings['project_key'] = get_input("Please enter the crucible project key:", cr_settings.get('project_key'))
     cr_settings['username'] = get_input("Please enter your crucible username:", cr_settings.get('username'))
     cr_settings['password'] = get_crucible_password()
+
+    reviewers_msg = "Enter a comma-separated list of usernames for anyone you'd like to include on reviews by default:"
+    cr_settings['reviewers'] = get_input(reviewers_msg, cr_settings.get('reviewers'))
+
     existing['crucible'] = cr_settings
     return existing
 

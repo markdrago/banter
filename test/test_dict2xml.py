@@ -36,6 +36,37 @@ class TestDict2Xml(unittest.TestCase):
         expected = "<outer><inner>tag</inner></outer>"
         self.assertEqual(expected, dict2xml.dict2xml(d))
 
+    def test_list(self):
+        d = {
+            'outer': [
+                {
+                    'inner': 'tag1'
+                },
+                {
+                    'inner': 'tag2'
+                }
+            ]
+        }
+        expected = "<outer><inner>tag1</inner><inner>tag2</inner></outer>"
+        self.assertEqual(expected, dict2xml.dict2xml(d))
+
+    def test_list_pretty(self):
+        d = {
+            'outer': [
+                {
+                    'inner': 'tag1'
+                },
+                {
+                    'inner': 'tag2'
+                }
+            ]
+        }
+        expected = "<outer>\n"
+        expected += "    <inner>tag1</inner>\n"
+        expected += "    <inner>tag2</inner>\n"
+        expected += "</outer>"
+        self.assertEqual(expected, dict2xml.dict2xml(d, pretty=True))
+
     def test_nested_tags_pretty(self):
         d = {
             'outer': {

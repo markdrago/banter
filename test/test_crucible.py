@@ -34,9 +34,9 @@ class TestRequest(unittest.TestCase):
         self.assertEqual('description here', review_data['description'])
         self.assertEqual('name here', review_data['name'])
         self.assertEqual('CR', review_data['projectKey'])
-        self.assertEqual('patch here', payload['createReview']['patch'])
+        self.assertEqual('<![CDATA[patch here]]>', payload['createReview']['patch'])
 
-    def test_prepare_payload(self):
+    def test_prepare_xml_payload(self):
         r = {
             'createReview': {
                 'reviewData': {
@@ -50,7 +50,7 @@ class TestRequest(unittest.TestCase):
         expected += '<allowReviewersToJoin>true</allowReviewersToJoin>'
         expected += '</reviewData>'
         expected += '</createReview>'
-        self.assertEqual(expected, self.c.prepare_payload(r))
+        self.assertEqual(expected, self.c.prepare_xml_payload(r))
 
     @staticmethod
     def sample_create_review_params():

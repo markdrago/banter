@@ -29,8 +29,8 @@ class Crucible(object):
 
     def create_review(self, token, **kwargs):
         request = self.get_create_review_request(token, **kwargs)
-        response = self.make_request(request)
-        return response
+        request['data'] = self.prepare_xml_payload(request['data'])
+        return self.make_request(request)
 
     @staticmethod
     def get_create_review_request(token, **kwargs):
@@ -62,8 +62,25 @@ class Crucible(object):
             }
         }
 
+    def add_reviewers(self, token, review_id, reviewers):
+        if len(reviewers) == 0:
+            return
+        request = self.get_add_reviewers_request(token, review_id, reviewers)
+        return self.make_request(request)
+
     @staticmethod
-    def prepare_payload(data):
+    def get_add_reviewers_request(token, review_id, reviewers):
+        return {
+            'method': 'POST',
+            'url': '/rest-service/reviews-v1/' + review_id + '/reviewers',
+            'params': {
+                'FEAUTH': token
+            },
+            'data': ','.join(reviewers)
+        }
+
+    @staticmethod
+    def prepare_xml_payload(data):
         result = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         result += dict2xml.dict2xml(data)
         return result
@@ -90,5 +107,4 @@ class Crucible(object):
         return requests.post(utils.combine_url_components(self.baseurl, request['url']),
                              params=request['params'],
                              headers=self.get_headers(),
-                             data=self.prepare_payload(request['data']))
-
+                             data=request['data'])
