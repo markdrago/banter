@@ -15,7 +15,7 @@ setup(
             'dejavu = dejavu.dejavu:main'
         ]
     },
-    install_requires=['requests', 'argparse'],
+    install_requires=['requests>=1.0', 'argparse'],
     tests_require=['unittest2', 'mock'],
     test_suite='unittest2.collector',
     classifiers=[
