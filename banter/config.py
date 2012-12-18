@@ -5,7 +5,7 @@ import ConfigParser
 class Config(object):
     def __init__(self):
         self.parser = ConfigParser.SafeConfigParser()
-        self.filename = os.path.expanduser('~/.config/rehash/rehash.conf')
+        self.filename = os.path.expanduser('~/.config/banter/banter.conf')
 
     def load_from_file(self):
         self.parser.read(self.filename)

@@ -1,18 +1,18 @@
 from setuptools import setup
 
 setup(
-    name='rehash',
+    name='banter',
     version='0.1.1',
     author='Mark Drago',
     author_email='markdrago@gmail.com',
-    url='http://github.com/markdrago/rehash',
-    download_url='http://pypi.python.org/pypi/rehash',
+    url='http://github.com/markdrago/banter',
+    download_url='http://pypi.python.org/pypi/banter',
     description='Create crucible code reviews from the command line',
     license='MIT',
-    packages=['rehash'],
+    packages=['banter'],
     entry_points={
         'console_scripts': [
-            'rehash = rehash.rehash:main'
+            'banter = banter.banter:main'
         ]
     },
     install_requires=['requests>=1.0', 'argparse'],
@@ -29,7 +29,7 @@ setup(
         'Topic :: Utilities'
     ],
     long_description="""
-**Rehash makes it easy to create code reviews from the command line.**
+**Banter makes it easy to create code reviews from the command line.**
 
 Currently it only supports the crucible code review tool created by
 Atlassian.

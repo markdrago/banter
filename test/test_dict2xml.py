@@ -1,6 +1,6 @@
 import unittest
 
-from rehash import dict2xml
+from banter import dict2xml
 
 class TestDict2Xml(unittest.TestCase):
     def test_single_tag(self):

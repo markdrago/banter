@@ -2,7 +2,7 @@ import unittest
 from mock import Mock
 import StringIO
 
-from rehash import config
+from banter import config
 
 class TestConfig(unittest.TestCase):
     def test_get_value(self):

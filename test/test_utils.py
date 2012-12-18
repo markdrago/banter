@@ -1,6 +1,6 @@
 import unittest
 
-from rehash import utils
+from banter import utils
 
 class TestUtils(unittest.TestCase):
     def setUp(self):

@@ -1,6 +1,6 @@
 import unittest
 
-from rehash import crucible
+from banter import crucible
 
 class TestRequest(unittest.TestCase):
     def setUp(self):
