@@ -1,6 +1,7 @@
 __pycache__
 *.pyc
 *~
-dejavu.egg-info
+banter.egg-info
 *.egg
 build
+dist
