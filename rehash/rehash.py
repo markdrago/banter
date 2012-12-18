@@ -9,7 +9,7 @@ import utils
 
 def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
-    parser.add_argument('--setup', action='store_true', help='setup dejavu configuration')
+    parser.add_argument('--setup', action='store_true', help='setup rehash configuration')
     parser_results = vars(parser.parse_args())
 
     if parser_results['setup']:
@@ -74,7 +74,7 @@ def load_config():
     conf = config.Config()
     conf.load_from_file()
     if not has_all_required_fields(conf):
-        print "Your configuration is incomplete, please run 'dejavu setup' to get that fixed up"
+        print "Your configuration is incomplete, please run 'rehash setup' to get that fixed up"
         return None
     return conf
 

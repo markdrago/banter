@@ -2,7 +2,7 @@ import unittest
 from mock import Mock
 import StringIO
 
-from dejavu import config
+from rehash import config
 
 class TestConfig(unittest.TestCase):
     def test_get_value(self):

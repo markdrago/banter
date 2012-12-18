@@ -1,6 +1,6 @@
 import unittest
 
-from dejavu import utils
+from rehash import utils
 
 class TestUtils(unittest.TestCase):
     def setUp(self):

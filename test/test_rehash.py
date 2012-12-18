@@ -1,8 +1,8 @@
 import unittest
 
-from dejavu import dejavu
+from rehash import rehash
 
-class TestDejavu(unittest.TestCase):
+class TestRehash(unittest.TestCase):
     def setUp(self):
         self.c = MockConfig()
         self.c.set_value('crucible', 'url', 'http://host/fisheye')
@@ -11,23 +11,23 @@ class TestDejavu(unittest.TestCase):
         self.c.set_value('crucible', 'project_key', 'CR')
 
     def test_required_fields_all_present(self):
-        self.assertTrue(dejavu.has_all_required_fields(self.c))
+        self.assertTrue(rehash.has_all_required_fields(self.c))
 
     def test_required_fields_url_missing(self):
         self.c.remove_value('crucible', 'url')
-        self.assertFalse(dejavu.has_all_required_fields(self.c))
+        self.assertFalse(rehash.has_all_required_fields(self.c))
 
     def test_required_fields_username_missing(self):
         self.c.remove_value('crucible', 'username')
-        self.assertFalse(dejavu.has_all_required_fields(self.c))
+        self.assertFalse(rehash.has_all_required_fields(self.c))
 
     def test_required_fields_token_missing(self):
         self.c.remove_value('crucible', 'token')
-        self.assertFalse(dejavu.has_all_required_fields(self.c))
+        self.assertFalse(rehash.has_all_required_fields(self.c))
 
     def test_required_fields_project_key_missing(self):
         self.c.remove_value('crucible', 'project_key')
-        self.assertFalse(dejavu.has_all_required_fields(self.c))
+        self.assertFalse(rehash.has_all_required_fields(self.c))
 
 class MockConfig(object):
     def __init__(self):

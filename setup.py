@@ -1,18 +1,18 @@
 from setuptools import setup
 
 setup(
-    name='dejavu',
+    name='rehash',
     version='0.1',
     author='Mark Drago',
     author_email='markdrago@gmail.com',
-    url='http://github.com/markdrago/dejavu',
-    download_url='http://pypi.python.org/pypi/dejavu',
+    url='http://github.com/markdrago/rehash',
+    download_url='http://pypi.python.org/pypi/rehash',
     description='Create crucible code reviews from the command line',
     license='MIT',
-    packages=['dejavu'],
+    packages=['rehash'],
     entry_points={
         'console_scripts': [
-            'dejavu = dejavu.dejavu:main'
+            'rehash = rehash.rehash:main'
         ]
     },
     install_requires=['requests>=1.0', 'argparse'],
@@ -29,7 +29,7 @@ setup(
         'Topic :: Utilities'
     ],
     long_description="""
-**Dejavu makes it easy to create code reviews from the command line.**
+**Rehash makes it easy to create code reviews from the command line.**
 
 Currently it only supports the crucible code review tool created by
 Atlassian.
