@@ -10,14 +10,15 @@ import utils
 def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
     parser.add_argument('--setup', action='store_true', help='setup banter configuration')
+    parser.add_argument('-t', '--title', help="set title of new review")
     parser_results = vars(parser.parse_args())
 
     if parser_results['setup']:
         setup()
     else:
-        create_review()
+        create_review(title=parser_results['title'])
 
-def create_review():
+def create_review(title=''):
     conf = load_config()
     if conf is None:
         return 1
@@ -31,16 +32,16 @@ def create_review():
 
     patch = sys.stdin.read()
 
-    review_id = do_create_review(crucible_conn, username, auth_token, project_key, patch)
+    review_id = do_create_review(crucible_conn, username, auth_token, project_key, patch, title)
     add_reviewers(crucible_conn, auth_token, review_id, reviewers)
     print utils.combine_url_components(crucible_url, "cru", review_id)
 
-def do_create_review(crucible_conn, username, auth_token, project_key, patch):
+def do_create_review(crucible_conn, username, auth_token, project_key, patch, title=''):
     parameters = {
         'allow_reviewers_to_join': True,
         'author': username,
         'description': '',
-        'name': '',
+        'name': title,
         'project_key': project_key,
         'patch': patch
     }
