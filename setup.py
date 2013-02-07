@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='banter',
-    version='0.1.2',
+    version='0.1.3',
     author='Mark Drago',
     author_email='markdrago@gmail.com',
     url='http://github.com/markdrago/banter',

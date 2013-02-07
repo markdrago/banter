@@ -6,6 +6,7 @@ import crucible
 import config
 import config_ui
 import utils
+import patch
 
 def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
@@ -30,20 +31,20 @@ def create_review(title=''):
     project_key = conf.get_value('crucible', 'project_key')
     reviewers = conf.get_value('crucible', 'reviewers')
 
-    patch = sys.stdin.read()
+    diff = patch.clean(sys.stdin.read())
 
-    review_id = do_create_review(crucible_conn, username, auth_token, project_key, patch, title)
+    review_id = do_create_review(crucible_conn, username, auth_token, project_key, diff, title)
     add_reviewers(crucible_conn, auth_token, review_id, reviewers)
     print utils.combine_url_components(crucible_url, "cru", review_id)
 
-def do_create_review(crucible_conn, username, auth_token, project_key, patch, title=''):
+def do_create_review(crucible_conn, username, auth_token, project_key, diff, title=''):
     parameters = {
         'allow_reviewers_to_join': True,
         'author': username,
         'description': '',
         'name': title,
         'project_key': project_key,
-        'patch': patch
+        'patch': diff
     }
 
     resp = crucible_conn.create_review(auth_token, **parameters)
