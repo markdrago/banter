@@ -17,7 +17,7 @@ def main():
     if parser_results['setup']:
         setup()
     else:
-        create_review(title=parser_results['title'])
+        return create_review(title=parser_results['title'])
 
 def create_review(title=''):
     conf = load_config()
@@ -30,10 +30,12 @@ def create_review(title=''):
     auth_token = conf.get_value('crucible', 'token')
     project_key = conf.get_value('crucible', 'project_key')
     reviewers = conf.get_value('crucible', 'reviewers')
-
     diff = patch.clean(sys.stdin.read())
 
     review_id = do_create_review(crucible_conn, username, auth_token, project_key, diff, title)
+    if  review_id == -1:
+        return review_id
+
     add_reviewers(crucible_conn, auth_token, review_id, reviewers)
     print utils.combine_url_components(crucible_url, "cru", review_id)
 
@@ -48,7 +50,12 @@ def do_create_review(crucible_conn, username, auth_token, project_key, diff, tit
     }
 
     resp = crucible_conn.create_review(auth_token, **parameters)
-    return resp.json()['permaId']['id']
+
+    if resp.status_code == 200 or resp.status_code == 201:
+        return resp.json()['permaId']['id']
+
+    sys.stderr.write("Got " + str(resp.status_code) + " HTTP code from server!\n")
+    return -1    
 
 def add_reviewers(crucible_conn, auth_token, review_id, reviewers):
     if reviewers is not None and reviewers != "":
