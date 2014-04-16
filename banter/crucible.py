@@ -1,8 +1,8 @@
-import requests
-import urlparse
+from __future__ import print_function
 
-import dict2xml
-import utils
+import requests
+
+from . import dict2xml, utils
 
 class Crucible(object):
     def __init__(self, baseurl):
@@ -12,7 +12,7 @@ class Crucible(object):
         request = self.get_auth_token_request(username, password)
         response = self.make_request(request)
         if response.json() == "" or response.json() is None:
-            print "An error occurred while trying to get an auth token from crucible"
+            print("An error occurred while trying to get an auth token from crucible")
             return None
         return response.json()['token']
 

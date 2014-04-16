@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='banter',
-    version='0.1.3',
+    version='0.2.0',
     author='Mark Drago',
     author_email='markdrago@gmail.com',
     url='http://github.com/markdrago/banter',
@@ -15,11 +15,12 @@ setup(
             'banter = banter.banter:main'
         ]
     },
-    install_requires=['requests>=1.0', 'argparse'],
-    tests_require=['unittest2', 'mock'],
-    test_suite='unittest2.collector',
+    install_requires=['requests>=1.0'],
+    tests_require=['mock'],
+    test_suite='test',
     classifiers=[
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
         'Operating System :: POSIX',
         'Development Status :: 4 - Beta',

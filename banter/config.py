@@ -1,10 +1,14 @@
 import sys
 import os
-import ConfigParser
+
+try:
+  import configparser
+except ImportError:
+  import ConfigParser as configparser
 
 class Config(object):
     def __init__(self):
-        self.parser = ConfigParser.SafeConfigParser()
+        self.parser = configparser.SafeConfigParser()
         self.filename = os.path.expanduser('~/.config/banter/banter.conf')
 
     def load_from_file(self):
@@ -27,7 +31,7 @@ class Config(object):
     def get_value(self, section, key):
         try:
             return self.parser.get(section, key)
-        except ConfigParser.Error as e:
+        except configparser.Error as e:
             return None
 
     def set_value(self, section, key, value):

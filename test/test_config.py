@@ -1,6 +1,10 @@
 import unittest
 from mock import Mock
-import StringIO
+
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 from banter import config
 
@@ -32,7 +36,7 @@ class TestConfig(unittest.TestCase):
         newtoken = "mdrago:104:wheredidthealphabetgo"
         c.set_value('auth', 'token', newtoken)
 
-        fp = StringIO.StringIO()
+        fp = StringIO()
         c.save_fp(fp)
         filecontents = fp.getvalue()
         fp.close()
@@ -44,7 +48,7 @@ class TestConfig(unittest.TestCase):
 
     @staticmethod
     def get_config_with_contents(contents):
-        buffer = StringIO.StringIO(contents)
+        buffer = StringIO(contents)
         c = config.Config()
         c.load_from_file_pointer(buffer)
         buffer.close()

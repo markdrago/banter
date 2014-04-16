@@ -86,7 +86,7 @@ class TestDict2Xml(unittest.TestCase):
             }
         }
         expected = "<outer>\n"
-        expected += "    <inner2>tag2</inner2>\n"
         expected += "    <inner>tag</inner>\n"
+        expected += "    <inner2>tag2</inner2>\n"
         expected += "</outer>"
         self.assertEqual(expected, dict2xml.dict2xml(d, pretty=True))

@@ -1,6 +1,8 @@
 def dict2xml(d, pretty=False, indent=0):
     accumulator = ''
-    for key in d.keys():
+    keys = list(d.keys())
+    keys.sort()
+    for key in keys:
         if pretty:
             if indent != 0:
                 accumulator += "\n" + (" " * indent)

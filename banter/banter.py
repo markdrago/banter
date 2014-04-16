@@ -1,12 +1,10 @@
+from __future__ import print_function
+
 import readline
 import sys
 import argparse
 
-import crucible
-import config
-import config_ui
-import utils
-import patch
+from . import crucible, config, config_ui, utils, patch
 
 def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
@@ -37,7 +35,7 @@ def create_review(title=''):
         return review_id
 
     add_reviewers(crucible_conn, auth_token, review_id, reviewers)
-    print utils.combine_url_components(crucible_url, "cru", review_id)
+    print(utils.combine_url_components(crucible_url, "cru", review_id))
 
 def do_create_review(crucible_conn, username, auth_token, project_key, diff, title=''):
     parameters = {
@@ -83,7 +81,7 @@ def load_config():
     conf = config.Config()
     conf.load_from_file()
     if not has_all_required_fields(conf):
-        print "Your configuration is incomplete, please run 'banter setup' to get that fixed up"
+        print("Your configuration is incomplete, please run 'banter setup' to get that fixed up")
         return None
     return conf
 

@@ -1,4 +1,10 @@
+from __future__ import print_function
+
 import getpass
+
+#work with python 2 & 3
+try: input = raw_input
+except NameError: pass
 
 def get_config_from_user(existing={}):
     cr_settings = existing.get('crucible', {})
@@ -18,12 +24,12 @@ def get_input(prompt, previous):
     prompt_suffix = " "
     if previous is not None:
         prompt_suffix = " [" + previous + "]"
-    value = raw_input(prompt + prompt_suffix)
+    value = input(prompt + prompt_suffix)
     if len(value) == 0:
         return previous
     return value
 
 def get_crucible_password():
-    print "In order to get an auth token from crucible, you must enter your password once."
+    print("In order to get an auth token from crucible, you must enter your password once.")
     password = getpass.getpass()
     return password
