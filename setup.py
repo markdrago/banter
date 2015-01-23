@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='banter',
-    version='0.2.0',
+    version='0.2.1',
     author='Mark Drago',
     author_email='markdrago@gmail.com',
     url='http://github.com/markdrago/banter',
@@ -15,7 +15,7 @@ setup(
             'banter = banter.banter:main'
         ]
     },
-    install_requires=['requests>=1.0'],
+    install_requires=['requests>=2.5.1'],
     tests_require=['mock'],
     test_suite='test',
     classifiers=[
