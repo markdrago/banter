@@ -32,7 +32,6 @@ class Crucible(object):
     def create_review(self, token, **kwargs):
         request = self.get_create_review_request(token, **kwargs)
         request['data'] = self.prepare_xml_payload(request['data'])
-        print(request)
         return self.make_request(request)
 
     @staticmethod
