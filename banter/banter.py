@@ -10,15 +10,16 @@ def main():
     parser = argparse.ArgumentParser(description='Create Code Reviews')
     parser.add_argument('--setup', action='store_true', help='setup banter configuration')
     parser.add_argument('-t', '--title', help="set title of new review")
-    parser.add_argument("-r" "--reviewers", help="set reviewers of new review")
+    parser.add_argument("-r", "--reviewers", help="set reviewers of new review")
     parser_results = vars(parser.parse_args())
 
     if parser_results['setup']:
         setup()
     else:
-        return create_review(title=parser_results['title'])
+        return create_review(title=parser_results['title'],
+                             reviewers=parser_results['reviewers'])
 
-def create_review(title='', reviewers=""):
+def create_review(title='', reviewers=''):
     conf = load_config()
     if conf is None:
         return 1

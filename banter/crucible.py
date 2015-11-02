@@ -7,6 +7,8 @@ from . import dict2xml, utils
 class Crucible(object):
     def __init__(self, baseurl):
         self.baseurl = baseurl
+        #This should probably be configurable
+        self.charset = "utf-8"
 
     def get_auth_token(self, username, password):
         request = self.get_auth_token_request(username, password)
@@ -30,6 +32,7 @@ class Crucible(object):
     def create_review(self, token, **kwargs):
         request = self.get_create_review_request(token, **kwargs)
         request['data'] = self.prepare_xml_payload(request['data'])
+        print(request)
         return self.make_request(request)
 
     @staticmethod
@@ -85,11 +88,11 @@ class Crucible(object):
         result += dict2xml.dict2xml(data)
         return result
 
-    @staticmethod
-    def get_headers():
+    def get_headers(self):
         return {
-            'content-type': 'application/xml',
-            'accept': 'application/json'
+            'content-type': ('application/xml;'
+                             'charset={encoding}'.format(encoding=self.charset)),
+            'accept': 'application/json',
         }
 
     def make_request(self, request):
@@ -107,4 +110,4 @@ class Crucible(object):
         return requests.post(utils.combine_url_components(self.baseurl, request['url']),
                              params=request['params'],
                              headers=self.get_headers(),
-                             data=request['data'])
+                             data=request['data'].encode(self.charset))
