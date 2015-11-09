@@ -8,14 +8,18 @@ except ImportError:
 
 class Config(object):
     def __init__(self):
-        self.parser = configparser.SafeConfigParser()
+        self.parser = configparser.ConfigParser()
         self.filename = os.path.expanduser('~/.config/banter/banter.conf')
 
     def load_from_file(self):
         self.parser.read(self.filename)
 
     def load_from_file_pointer(self, fp):
-        self.parser.readfp(fp)
+        # work with both python 3 and python 2
+        if 'read_file' in dir(self.parser):
+            self.parser.read_file(fp)
+        else:
+            self.parser.readfp(fp)
 
     def as_dict(self):
         main_dict = {}
