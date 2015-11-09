@@ -29,11 +29,11 @@ def create_review(title='', reviewers=''):
     username = conf.get_value('crucible', 'username')
     auth_token = conf.get_value('crucible', 'token')
     project_key = conf.get_value('crucible', 'project_key')
-    reviewers = reviewers or conf.get_value('crucible', 'reviewers') 
+    reviewers = reviewers or conf.get_value('crucible', 'reviewers')
     diff = patch.clean(sys.stdin.read())
 
     review_id = do_create_review(crucible_conn, username, auth_token, project_key, diff, title)
-    if  review_id == -1:
+    if review_id == -1:
         return review_id
 
     add_reviewers(crucible_conn, auth_token, review_id, reviewers)
@@ -55,7 +55,7 @@ def do_create_review(crucible_conn, username, auth_token, project_key, diff, tit
         return resp.json()['permaId']['id']
 
     sys.stderr.write("Got " + str(resp.status_code) + " HTTP code from server!\n")
-    return -1    
+    return -1
 
 def add_reviewers(crucible_conn, auth_token, review_id, reviewers):
     if reviewers is not None and reviewers != "":
@@ -71,7 +71,7 @@ def setup():
     conf.save()
 
 def set_crucible_token(conf):
-    #get crucible token and forget crucible password
+    # get crucible token and forget crucible password
     crucible_conn = crucible.Crucible(conf['crucible']['url'])
     token = crucible_conn.get_auth_token(conf['crucible']['username'], conf['crucible']['password'])
 

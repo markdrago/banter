@@ -2,9 +2,11 @@ from __future__ import print_function
 
 import getpass
 
-#work with python 2 & 3
-try: input = raw_input
-except NameError: pass
+# work with python 2 & 3
+try:
+    input = raw_input
+except NameError:
+    pass
 
 def get_config_from_user(existing={}):
     cr_settings = existing.get('crucible', {})

@@ -7,7 +7,7 @@ from . import dict2xml, utils
 class Crucible(object):
     def __init__(self, baseurl):
         self.baseurl = baseurl
-        #This should probably be configurable
+        # This should probably be configurable
         self.charset = "utf-8"
 
     def get_auth_token(self, username, password):

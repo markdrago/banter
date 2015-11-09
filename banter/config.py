@@ -2,9 +2,9 @@ import sys
 import os
 
 try:
-  import configparser
+    import configparser
 except ImportError:
-  import ConfigParser as configparser
+    import ConfigParser as configparser
 
 class Config(object):
     def __init__(self):

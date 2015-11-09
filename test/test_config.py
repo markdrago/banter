@@ -27,12 +27,12 @@ class TestConfig(unittest.TestCase):
         self.assertIsNone(c.get_value('auth', 'token'))
 
     def test_set_value_and_save_overwrites_existing_value(self):
-        #setup a primed config object
+        # setup a primed config object
         contents = "[auth]\n"
         contents += "token = mdrago:102:abcdefghijklmnopqrstuvwxyz\n\n"
         c = self.get_config_with_contents(contents)
 
-        #create a stringIO object to receive the changes and set the new token
+        # create a stringIO object to receive the changes and set the new token
         newtoken = "mdrago:104:wheredidthealphabetgo"
         c.set_value('auth', 'token', newtoken)
 
@@ -41,7 +41,7 @@ class TestConfig(unittest.TestCase):
         filecontents = fp.getvalue()
         fp.close()
 
-        #verify that the new token was written
+        # verify that the new token was written
         expected = "[auth]\n"
         expected += "token = mdrago:104:wheredidthealphabetgo\n\n"
         self.assertEqual(expected, filecontents)
